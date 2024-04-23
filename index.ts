@@ -1,6 +1,7 @@
 import {
   Feature,
   FeatureCollection,
+  GeoJsonProperties,
   MultiPolygon,
   Point,
   Polygon
@@ -13,11 +14,17 @@ import booleanPointInPolygon from '@turf/boolean-point-in-polygon';
 type Region = Polygon | MultiPolygon;
 
 // noinspection JSUnusedGlobalSymbols
-export class FastPointInPoly {
-  readonly #features: Feature<Region>[];
+export class FastPointInPoly<
+  Properties extends GeoJsonProperties = GeoJsonProperties
+> {
+  readonly #features: Feature<Region, Properties>[];
   readonly #index: KDBush;
 
-  constructor(features: FeatureCollection<Region> | Feature<Region>[]) {
+  constructor(
+    features:
+      | FeatureCollection<Region, Properties>
+      | Feature<Region, Properties>[]
+  ) {
     if (Array.isArray(features)) {
       this.#features = features;
     } else {
@@ -38,7 +45,7 @@ export class FastPointInPoly {
 
   find(
     point: Feature<Point> | Point | [number, number]
-  ): Feature<Region> | null {
+  ): Feature<Region, Properties> | null {
     const [longitude, latitude] = Array.isArray(point)
       ? point
       : point.type === 'Feature'
