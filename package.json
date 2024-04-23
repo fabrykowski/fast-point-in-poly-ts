@@ -1,0 +1,62 @@
+{
+  "type": "module",
+  "name": "fast-point-in-poly-ts",
+  "version": "1.0.0",
+  "description": "Quickly find points in large sets of polygons",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "require": "./index.js",
+      "types": "./index.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "test": "tsc --build tsconfig.eslint.json && esbuild index.test.ts --bundle --outfile=index.test.js --platform=node --format=esm --packages=external && node --test index.test.js",
+    "build": "tsc && esbuild index.ts --bundle --outfile=index.js --platform=node --format=esm --packages=external --minify",
+    "lint": "prettier --check . && eslint .",
+    "format": "prettier --write .",
+    "prepack": "pnpm run lint && pnpm run build && pnpm run test"
+  },
+  "keywords": [
+    "geojson",
+    "point",
+    "polygon"
+  ],
+  "author": "fabrykowski",
+  "license": "MIT",
+  "devDependencies": {
+    "@tsconfig/node-lts": "^20.1.3",
+    "@types/eslint": "^8.56.10",
+    "@types/node": "^20.12.7",
+    "@typescript-eslint/eslint-plugin": "^7.7.1",
+    "@typescript-eslint/parser": "^7.7.1",
+    "esbuild": "^0.20.2",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^8.10.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@turf/boolean-point-in-polygon": "7.0.0-alpha.114",
+    "@turf/center-of-mass": "7.0.0-alpha.114",
+    "@types/geojson": "^7946.0.14",
+    "geokdbush-tk": "^2.0.4",
+    "kdbush": "^4.0.2"
+  },
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fabrykowski/fast-point-in-poly-ts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fabrykowski/fast-point-in-poly-ts/issues"
+  },
+  "homepage": "https://github.com/fabrykowski/fast-point-in-poly-ts#readme"
+}

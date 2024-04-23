@@ -1,0 +1,16 @@
+{
+  "extends": "@tsconfig/node-lts/tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "emitDeclarationOnly": true,
+    "baseUrl": "./"
+  },
+  "include": [
+    "*.ts"
+  ],
+  "exclude": [
+    "index.test.ts"
+  ]
+}
