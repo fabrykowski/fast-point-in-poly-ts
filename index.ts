@@ -11,19 +11,17 @@ import KDBush from 'kdbush';
 import { around } from 'geokdbush-tk';
 import booleanPointInPolygon from '@turf/boolean-point-in-polygon';
 
-type Region = Polygon | MultiPolygon;
-
 // noinspection JSUnusedGlobalSymbols
 export class FastPointInPoly<
   Properties extends GeoJsonProperties = GeoJsonProperties
 > {
-  readonly #features: Feature<Region, Properties>[];
+  readonly #features: Feature<Polygon | MultiPolygon, Properties>[];
   readonly #index: KDBush;
 
   constructor(
     features:
-      | FeatureCollection<Region, Properties>
-      | Feature<Region, Properties>[]
+      | FeatureCollection<Polygon | MultiPolygon, Properties>
+      | Feature<Polygon | MultiPolygon, Properties>[]
   ) {
     if (Array.isArray(features)) {
       this.#features = features;
@@ -44,8 +42,8 @@ export class FastPointInPoly<
   }
 
   find(
-    point: Feature<Point> | Point | [number, number]
-  ): Feature<Region, Properties> | null {
+    point: Feature<Point> | Point | [longitude: number, latitude: number]
+  ): Feature<Polygon | MultiPolygon, Properties> | null {
     const [longitude, latitude] = Array.isArray(point)
       ? point
       : point.type === 'Feature'
