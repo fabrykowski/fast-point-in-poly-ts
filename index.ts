@@ -1,3 +1,5 @@
+import booleanPointInPolygon from '@turf/boolean-point-in-polygon';
+import centerOfMass from '@turf/center-of-mass';
 import {
   Feature,
   FeatureCollection,
@@ -6,10 +8,8 @@ import {
   Point,
   Polygon
 } from 'geojson';
-import centerOfMass from '@turf/center-of-mass';
+import { around } from 'geokdbush';
 import KDBush from 'kdbush';
-import { around } from 'geokdbush-tk';
-import booleanPointInPolygon from '@turf/boolean-point-in-polygon';
 
 // noinspection JSUnusedGlobalSymbols
 export class FastPointInPoly<
@@ -29,31 +29,25 @@ export class FastPointInPoly<
       this.#features = features.features;
     }
 
-    const points = this.#features.map(f => centerOfMass(f));
+    const points = this.#features.map(feature => centerOfMass(feature));
 
     this.#index = new KDBush(points.length);
 
     for (const point of points) {
-      this.#index.add(
-        point.geometry.coordinates[0],
-        point.geometry.coordinates[1]
-      );
+      const [longitude, latitude] = point.geometry.coordinates;
+      this.#index.add(longitude, latitude);
     }
   }
 
   find(
     point: Feature<Point> | Point | [longitude: number, latitude: number]
   ): Feature<Polygon | MultiPolygon, Properties> | null {
-    const [longitude, latitude] = Array.isArray(point)
-      ? point
-      : point.type === 'Feature'
-        ? point.geometry.coordinates
-        : point.coordinates;
+    const [longitude, latitude] = getLongitudeAndLatitude(point);
 
     const indices = around(this.#index, longitude, latitude);
 
-    for (let i = 0; i < indices.length; i++) {
-      const feature = this.#features[indices[i]];
+    for (const index of indices) {
+      const feature = this.#features[index];
 
       if (booleanPointInPolygon(point, feature)) {
         return feature;
@@ -63,5 +57,22 @@ export class FastPointInPoly<
     return null;
   }
 }
+
+type Position2D = [longitude: number, latitude: number];
+const DIMENSIONS = 2;
+
+const getLongitudeAndLatitude = (
+  point: Feature<Point> | Point | [longitude: number, latitude: number]
+): Position2D => {
+  if (Array.isArray(point)) {
+    return point;
+  }
+
+  if (point.type === 'Feature') {
+    return point.geometry.coordinates.slice(0, DIMENSIONS) as Position2D;
+  }
+
+  return point.coordinates.slice(0, DIMENSIONS) as Position2D;
+};
 
 export default FastPointInPoly;

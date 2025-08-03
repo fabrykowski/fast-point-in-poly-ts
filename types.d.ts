@@ -1,6 +1,7 @@
-declare module 'geokdbush-tk' {
+declare module 'geokdbush' {
   import KDBush from 'kdbush';
 
+  // eslint-disable-next-line max-params
   export function around(
     index: KDBush,
     longitude: number,

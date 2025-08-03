@@ -3,4 +3,4 @@ node_modules
 *.tgz
 *.js
 index.d.ts
-
+*.tsbuildinfo

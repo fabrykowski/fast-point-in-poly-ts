@@ -1,15 +1,16 @@
+/* eslint-disable no-magic-numbers */
 import assert from 'assert/strict';
-import test from 'node:test';
 import { Feature, MultiPolygon, Point, Polygon } from 'geojson';
+import test from 'node:test';
 
 import { FastPointInPoly } from './index.js';
 
-test('points connect to the expected polys', () => {
+await test('points connect to the expected polys', () => {
   const finder = new FastPointInPoly(polygons);
-  for (const p of points) {
-    const poly = finder.find(p);
-    const pointG = p.properties.group ?? null;
-    const polyG = poly === null ? null : poly.properties?.group;
+  for (const point of points) {
+    const poly = finder.find(point);
+    const pointG = point.properties.group ?? null;
+    const polyG = poly === null ? null : poly.properties.group;
     assert.equal(polyG, pointG);
   }
 });
