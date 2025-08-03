@@ -59,5 +59,10 @@
   "bugs": {
     "url": "https://github.com/fabrykowski/fast-point-in-poly-ts/issues"
   },
-  "homepage": "https://github.com/fabrykowski/fast-point-in-poly-ts#readme"
+  "homepage": "https://github.com/fabrykowski/fast-point-in-poly-ts#readme",
+  "overrides": {
+    "typescript-eslint": {
+      "typescript": "$typescript"
+    }
+  }
 }
