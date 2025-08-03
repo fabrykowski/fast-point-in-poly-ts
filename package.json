@@ -18,7 +18,7 @@
     "build": "tsc && esbuild index.ts --bundle --outfile=index.js --platform=node --format=esm --packages=external --minify",
     "lint": "prettier --check . && eslint",
     "format": "prettier --write .",
-    "prepack": "pnpm lint && pnpm build && pnpm test"
+    "prepack": "npm run lint && npm run build && npm run test"
   },
   "keywords": [
     "geojson",
