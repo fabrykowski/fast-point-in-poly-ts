@@ -5,16 +5,6 @@ import test from 'node:test';
 
 import { FastPointInPoly } from './index.js';
 
-await test('points connect to the expected polys', () => {
-  const finder = new FastPointInPoly(polygons);
-  for (const point of points) {
-    const poly = finder.find(point);
-    const pointG = point.properties.group ?? null;
-    const polyG = poly === null ? null : poly.properties.group;
-    assert.equal(polyG, pointG);
-  }
-});
-
 const polygons = [
   {
     type: 'Feature',
@@ -125,3 +115,13 @@ const points = [
     }
   }
 ] satisfies Feature<Point>[];
+
+await test('points connect to the expected polys', () => {
+  const finder = new FastPointInPoly(polygons);
+  for (const point of points) {
+    const poly = finder.find(point);
+    const pointG = point.properties.group ?? null;
+    const polyG = poly === null ? null : poly.properties.group;
+    assert.equal(polyG, pointG);
+  }
+});
