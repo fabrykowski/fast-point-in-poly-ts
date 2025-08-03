@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "fast-point-in-poly-ts",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Quickly find points in large sets of polygons",
   "main": "index.js",
   "types": "index.d.ts",
