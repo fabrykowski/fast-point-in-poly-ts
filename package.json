@@ -14,6 +14,7 @@
     "./package.json": "./package.json"
   },
   "scripts": {
+    "build:test": "tsc --build tsconfig.eslint.json && esbuild index.test.ts --bundle --outfile=index.test.js --platform=node --format=esm --packages=external",
     "test": "tsc --build tsconfig.eslint.json && esbuild index.test.ts --bundle --outfile=index.test.js --platform=node --format=esm --packages=external && node --test index.test.js",
     "build": "tsc && esbuild index.ts --bundle --outfile=index.js --platform=node --format=esm --packages=external --minify",
     "lint": "prettier --check . && eslint",
