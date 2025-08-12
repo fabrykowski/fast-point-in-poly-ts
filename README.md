@@ -1,6 +1,6 @@
 # fast-point-in-poly-ts
 
-[![npm version](https://badge.fury.io/js/fast-point-in-poly-ts.svg)](https://badge.fury.io/js/fast-point-in-poly-ts)
+![NPM Version](https://img.shields.io/npm/v/vite-plugin-ssh-tunnel)
 
 Simple API for doing point and polygon checks on large sets of polygons. Most useful when doing MANY checks.
 
