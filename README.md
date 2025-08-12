@@ -1,6 +1,6 @@
 # fast-point-in-poly-ts
 
-![NPM Version](https://img.shields.io/npm/v/vite-plugin-ssh-tunnel)
+[![NPM Version](https://img.shields.io/npm/v/vite-plugin-ssh-tunnel)](https://www.npmjs.com/package/fast-point-in-poly-ts)
 
 Simple API for doing point and polygon checks on large sets of polygons. Most useful when doing MANY checks.
 
