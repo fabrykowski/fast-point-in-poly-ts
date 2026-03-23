@@ -29,17 +29,17 @@
   "author": "fabrykowski",
   "license": "MIT",
   "devDependencies": {
-    "@eslint/js": "^9.32.0",
+    "@eslint/js": "^10.0.1",
     "@trivago/prettier-plugin-sort-imports": "^6.0.0",
     "@tsconfig/node-lts": "^24.0.0",
     "@types/eslint": "^9.6.1",
-    "@types/node": "~24",
+    "@types/node": "~25",
     "esbuild": "^0.27.0",
-    "eslint": "^9.32.0",
+    "eslint": "^10.1.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.3",
     "prettier": "^3.6.2",
-    "typescript": "^5.9.2",
+    "typescript": "^6.0.2",
     "typescript-eslint": "^8.38.0"
   },
   "dependencies": {
